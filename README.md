@@ -5,7 +5,7 @@ SuperSelector
 A JQuery UI enhancement of the standard HTML Select element
 
 Super selector comes with a wide range of aditional feautres above the standard select element:
-- Theming of list elements
+- Theming of list elements with CSS
 - Grouping of list elements
 - Headings for lists
 - Disabling elements
@@ -16,4 +16,4 @@ Super selector comes with a wide range of aditional feautres above the standard 
 
 Comming Soon
 ================================
-full setup and usage instructions comming in the next few days!
+Full setup and usage instructions comming in the next few days!
