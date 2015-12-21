@@ -580,14 +580,13 @@
 })(jQuery);
 
 //override jquery val() fucntion to allow superselector to function as standard input
-
 $(function(){
-  $.fn.oldVal = $.fn.val
+  $.fn.preSupSelVal = $.fn.val
   $.fn.val = function(value){
     if(typeof(value) == "undefined"){
-      return typeof($(this).data('superselctor-value')) != "undefined" ? $(this).data('superselctor-value') : $(this).oldVal();
+      return typeof($(this).data('superselctor-value')) != "undefined" ? $(this).data('superselctor-value') : $(this).preSupSelVal();
     }else{
-      var result = typeof($(this).data('superselctor-value')) != "undefined" ? $(this).data('superselctor-value', value) : $(this).oldVal(value);
+      var result = typeof($(this).data('superselctor-value')) != "undefined" ? $(this).data('superselctor-value', value) : $(this).preSupSelVal(value);
       $(this).trigger("valueSet")
       return result;
     }
