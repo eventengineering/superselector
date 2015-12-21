@@ -21,7 +21,7 @@
 
   				element.addClass("superselector");
 
-  				element.data("value", ""); //define value data paremeter so jquery knows to use that for the  select boxes value
+  				element.data("superselctor-value", ""); //define value data paremeter so jquery knows to use that for the  select boxes value
   				//element.after("<i class='fa " + options.icon + " superselector-icon' style='color:#000;'></i>");
 
   				//add space for caret
@@ -104,7 +104,7 @@
   				//handle value changed by jquery .val() method
   				element.on("valueSet", function(e){
 
-  					var newData = element.data("value");
+  					var newData = element.data("superselctor-value");
 
   					if(newData == "" || newData == null){
   						self._clearData();
@@ -552,7 +552,7 @@
 
   		//set provided data as current
   		_selectData:function(data, noEvent){
-  			this.element.data("value", data.value);
+  			this.element.data("superselctor-value", data.value);
   			this.element[0].value = data.selectedTitle ? data.selectedTitle : data.title;
 
   			this.selected_item = data;
@@ -565,7 +565,7 @@
 
   		//clear currently selected data
   		_clearData:function(){
-  			this.element.data("value", "");
+  			this.element.data("superselctor-value", "");
   			this.element[0].value = "";
 
   			this.selected_item = null;
@@ -578,3 +578,18 @@
 
   	});
 })(jQuery);
+
+//override jquery val() fucntion to allow superselector to function as standard input
+
+$(function(){
+  $.fn.oldVal = $.fn.val
+  $.fn.val = function(value){
+    if(typeof(value) == "undefined"){
+      return typeof($(this).data('superselctor-value')) != "undefined" ? $(this).data('superselctor-value') : $(this).oldVal();
+    }else{
+      var result = typeof($(this).data('superselctor-value')) != "undefined" ? $(this).data('superselctor-value', value) : $(this).oldVal(value);
+      $(this).trigger("valueSet")
+      return result;
+    }
+  }
+});
