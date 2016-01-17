@@ -102,12 +102,12 @@ Setting The Value
 ================================
 The value of a SuperSelector can be set using the standard jquery ***.val()*** function.
 
-If the set value is not in the list then it is displayed in the input box as the value rather than a specified title.
+If the set value is not in the list, then it is displayed in the input box as the value rather than a specified title.
 
 If you wish to set the SuperSelector to a value not in the list, and display a seperate title then you can set the value with an item object instead.
 
 ```js
-$("#example-selector").val({value:"unlisted_value", title:"Unlisted Value"}); //set the Selectors value to one that isnt in the list, and display a custom title for it.
+$("#example-selector").val({value:"unlisted_value", title:"Unlisted Value"}); //set the SuperSelectors value to one that isnt in the list, and display a custom title for it.
 ```
 
 

@@ -96,7 +96,9 @@
 			<fieldset>
 			<legend>Example Controlls</legend>
 
-			<input id="set" type="button" value="Set Value to 'Second Item">
+			<input id="set" type="button" value="Set Value to 'Second Item'">
+			<input id="set-unlisted" type="button" value="Set Value to item not in the list">
+			<input id="set-unlisted-title" type="button" value="Set Value to item not in the list, with custom title">
 			<input id="get" type="button" value="Get SuperSelector Value">
 			<input id="disable" type="button" value="Disable Third Item">
 			<input id="remove" type="button" value="Remove Fourth Item">
@@ -130,6 +132,14 @@
 
 		$("#set").click(function(){
 			$("#example-playground").val("second");
+		});
+
+		$("#set-unlisted").click(function(){
+			$("#example-playground").val("bob");
+		});
+
+		$("#set-unlisted-title").click(function(){
+			$("#example-playground").val({value:"bob", title:"Unlisted Item"});
 		});
 
 		$("#get").click(function(){
