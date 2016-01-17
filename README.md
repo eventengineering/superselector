@@ -190,7 +190,7 @@ To set a completly new list in the SuperSelector, use the ***setItems*** functio
 
 ```js
 var newItems = items:[
-	{value:"newFirst, title:"1st Item"},
+	{value:"newFirst", title:"1st Item"},
 	{value:"newSecond", title:"Second Item"},
 	{value:"newThird", title:"3rd Item"},
 ];
