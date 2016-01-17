@@ -4,6 +4,8 @@ SuperSelector
 
 A JQuery UI enhancement of the standard HTML Select element
 
+![Example Super Selector](/examples/example.jpg?raw=true")
+
 Super selector comes with a wide range of aditional feautres above the standard select element:
 - Theming of list elements with CSS
 - Grouping of list elements
