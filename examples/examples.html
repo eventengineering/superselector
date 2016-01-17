@@ -37,13 +37,12 @@
 		margin-bottom:2px;
 	}
 
-	button, select{
-		margin-right:20px;
-	}
-
 	input{
 		font-family: 'Montserrat', sans-serif !important;
-
+	}
+	input[type=button]{
+		margin-right:20px;
+		margin-bottom:10px;
 	}
 
 	</style>
@@ -84,8 +83,96 @@
 			],
 		})
 
-</script>
-</section>
+		</script>
+	</section>
+
+	<section>
+		<header>Example Playground</header>
+
+
+		<p>Use the controls below to test each of the SuperSeletor Functions</p>
+
+		<p>
+			<fieldset>
+			<legend>Example Controlls</legend>
+
+			<input id="set" type="button" value="Set Value to 'Second Item">
+			<input id="get" type="button" value="Get SuperSelector Value">
+			<input id="disable" type="button" value="Disable Third Item">
+			<input id="remove" type="button" value="Remove Fourth Item">
+			<input id="replace" type="button" value="Replace Fifth Item">
+			<input id="add" type="button" value="Add New Item">
+			<input id="insert" type="button" value="Insert Item Before Sixth Item">
+			<div>
+				<input id="reset" type="button" value="Reset SuperSelector" style="margin-bottom:0;">
+			</div>
+
+		</fieldset>
+		</p>
+
+		<label>Result: </label><input id="example-playground" name="name" type="text">
+		<script type="text/javascript">
+
+		$("#example-playground").superselector({
+			items:[
+			{value:"first", title:"First Item"},
+			{value:"second", title:"Second Item"},
+			{type:"title", title:"Group Title"},
+			{value:"third", title:"Third Item"},
+			{value:"fourth", title:"Disabled Item", disabled:true},
+			{value:"fifth", title:"Fifth Item"},
+			{type:"seperator"},
+			{value:"sixth", title:"Sixth Item"},
+			],
+		})
+
+		$("#example-playground").val("first");
+
+		$("#set").click(function(){
+			$("#example-playground").val("second");
+		});
+
+		$("#get").click(function(){
+			alert("Super Selector Value: " + $("#example-playground").val());
+		});
+
+		$("#disable").click(function(){
+			$("#example-playground").superselector("disableItem", "third", true);
+		});
+
+		$("#remove").click(function(){
+			$("#example-playground").superselector("removeItem", "fourth", true);
+		});
+
+		$("#replace").click(function(){
+			$("#example-playground").superselector("replaceItem", "fifth", {value:"replacement", title:"Replacement Item"});
+		});
+
+		$("#add").click(function(){
+			$("#example-playground").superselector("addItem", {value:"added", title:"Added Item"});
+		});
+
+		$("#insert").click(function(){
+			$("#example-playground").superselector("insertItem", "sixth", {value:"inserted", title:"Inserted Item"}, true);
+		});
+
+		$("#reset").click(function(){
+			$("#example-playground").superselector("setItems", [
+			{value:"first", title:"First Item"},
+			{value:"second", title:"Second Item"},
+			{type:"title", title:"Group Title"},
+			{value:"third", title:"Third Item"},
+			{value:"fourth", title:"Disabled Item", disabled:true},
+			{value:"fifth", title:"Fifth Item"},
+			{type:"seperator"},
+			{value:"sixth", title:"Sixth Item"},
+			]);
+		});
+		</script>
+
+	</section>
+
+
 
 </body>
 </html>
