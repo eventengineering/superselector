@@ -92,7 +92,7 @@
 
   				// clean up on blur
   				element.blur(function(e){
-  					if(ee.blurOrigin.closest(".superselector-list").length != 1){
+  					if(superselector.blurOrigin.closest(".superselector-list").length != 1){
   						self.list.remove();
   						element.prop("readonly", false);
   						self._restore();
@@ -214,7 +214,7 @@
   			items.push(newItem);
   		},
 
-  		//remmove item by value
+  		//insert item by value
   		insertItem:function(itemValue, newItem, before){
   			var self = this;
   			var items = self.options.items.slice();
@@ -260,7 +260,7 @@
   		},
 
   		//get list of current items
-  		getItems:function(newItems){
+  		getItems:function(){
   			return this.options.items;
   		},
 
@@ -269,10 +269,7 @@
   		setItems:function(newItems){
   			var self = this;
         self.options.items = newItems;
-        console.log("setting items", newItems)
-
-
-  		},
+      },
 
 
   		//on key down
@@ -458,7 +455,7 @@
   			item.addClass("active");
 
         self.element[0].value = item.data("data").selectedTitle ? item.data("data").selectedTitle : item.data("data").title;
-  		},
+      },
 
   		//construct and display option list
   		render:function(){
@@ -515,24 +512,24 @@
 
   					case "choice":
             var title = item.title != "" ? item.title : "&nbsp;";
-  					line = $('<li class="choice">' + title + '</li>');
+            line = $('<li class="choice">' + title + '</li>');
 
-  					if(self.selected_item){
-  						if(item.value == self.selected_item.value){
-  							line.addClass("active");
-  						}
-  					}
-  					break;
-  				}
+            if(self.selected_item){
+              if(item.value == self.selected_item.value){
+               line.addClass("active");
+             }
+           }
+           break;
+         }
 
-  				if(item.disabled){
-  					line.addClass("disabled");
-  				}
+         if(item.disabled){
+           line.addClass("disabled");
+         }
 
-  				line.data("data", item);
+         line.data("data", item);
 
-  				ul.append(line);
-  			});
+         ul.append(line);
+       });
 
   			return ul;
 
@@ -577,8 +574,18 @@
   	});
 })(jQuery);
 
-//override jquery val() fucntion to allow superselector to function as standard input
+//Global object to hold blur origins to allow clean exit of lookup list
+var superselector = {blurOrigin:$("")};
+
+//Override jquery val() fucntion to allow superselector to function as standard input
 $(function(){
+
+  //Capture new focused emelemt to allow list to be gracefully closed
+  $(document).mousedown(function(e) {
+    superselector.blurOrigin = $(e.target);
+  });
+
+  //Override standard .val() function to operate with SuperSelector
   $.fn.preSupSelVal = $.fn.val
   $.fn.val = function(value){
     if(typeof(value) == "undefined"){
