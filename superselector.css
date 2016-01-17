@@ -11,21 +11,15 @@
   pointer-events: none;
 }
 .superselector {
-  /*&:focus{
-		outline:1px solid @Outline-Colour;
-	}*/
   box-sizing: border-box;
   vertical-align: middle;
 }
-.pane_menu .superselector-icon {
-  margin-left: -24px;
-  vertical-align: middle;
+.superselector:focus {
+  outline: 1px solid #c00;
 }
-.superselector-icon {
-  margin-left: -14px;
-  margin-right: 12px;
-  font-size: 14px;
-  font-weight: normal;
+.superselector,
+.superselector-list {
+  font-size: .8em;
 }
 .superselector-list {
   position: absolute;

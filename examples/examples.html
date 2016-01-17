@@ -1,0 +1,99 @@
+<html>
+<head>
+	<title>Tabulator - Live Demo</title>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+	<script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+	<script type="text/javascript" src="superselector.js"></script>
+	<link rel="stylesheet" href="superselector.css">
+</head>
+<body>
+
+	<style type="text/css">
+	body{
+		padding:20px 40px;
+		font-family: 'Montserrat', sans-serif !important;
+	}
+
+	header{
+		font-weight: bold;
+		font-size: 30px;
+	}
+
+	section:first-of-type header{
+		font-size: 50px;
+	}
+
+	section{
+		margin-bottom:20px;
+	}
+
+	ul>li{
+		margin-bottom:2px;
+	}
+
+	button, select{
+		margin-right:20px;
+	}
+
+	input{
+		font-family: 'Montserrat', sans-serif !important;
+
+	}
+
+	</style>
+	<script type="text/javascript">
+
+	</script>
+
+	<section>
+		<header>SuperSelector</header>
+
+		<p>A JQuery UI enhancement of the standard HTML Select element</p>
+
+		![Example Super Selector](/examples/example.jpg?raw=true")
+
+		<p>Super selector comes with a wide range of aditional feautres above the standard select element:
+			<ul>
+				<li>Theming of list elements with CSS</li>
+				<li>Grouping of list elements</li>
+				<li>Headings for lists</li>
+				<li>Disabling elements</li>
+				<li>Works with jquery's standard .val() getter/setter</li>
+				<li>Callbacks on select/click</li>
+				<li>Easily change list elements</li>
+			</ul>
+		</p>
+
+		<label>Example SuperSelector: </label><input id="example-1" name="name" type="text">
+		<script type="text/javascript">
+
+		$("#example-1").superselector({
+			items:[
+			{value:"first", title:"First Item"},
+			{value:"second", title:"Second Item"},
+			{type:"title", title:"Group Title"},
+			{value:"third", title:"Third Item"},
+			{value:"fourth", title:"Disabled Item", disabled:true},
+			{value:"fifth", title:"Fifth Item"},
+			{type:"seperator"},
+			{value:"sixth", title:"Sixth Item"},
+			],
+		})
+		/*$("#example-table-1").tabulator("setData", tabledata);
+
+		$(window).resize(function(){
+			$("#example-table-1").tabulator("redraw");
+		});*/
+
+</script>
+</section>
+
+</body>
+</html>
