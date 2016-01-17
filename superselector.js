@@ -577,23 +577,22 @@
 //Global object to hold blur origins to allow clean exit of lookup list
 var superselector = {blurOrigin:$("")};
 
-//Override jquery val() fucntion to allow superselector to function as standard input
-$(function(){
 
-  //Capture new focused emelemt to allow list to be gracefully closed
-  $(document).mousedown(function(e) {
-    superselector.blurOrigin = $(e.target);
-  });
 
-  //Override standard .val() function to operate with SuperSelector
-  $.fn.preSupSelVal = $.fn.val
-  $.fn.val = function(value){
-    if(typeof(value) == "undefined"){
-      return typeof($(this).data('superselctor-value')) != "undefined" ? $(this).data('superselctor-value') : $(this).preSupSelVal();
-    }else{
-      var result = typeof($(this).data('superselctor-value')) != "undefined" ? $(this).data('superselctor-value', value) : $(this).preSupSelVal(value);
-      $(this).trigger("valueSet")
-      return result;
-    }
-  }
+//Capture new focused emelemt to allow list to be gracefully closed
+$(document).mousedown(function(e) {
+  superselector.blurOrigin = $(e.target);
 });
+
+//Override jquery val() fucntion to allow superselector to function as standard input
+$.fn.preSupSelVal = $.fn.val
+$.fn.val = function(value){
+  console.log("value", value)
+  if(typeof(value) == "undefined"){
+    return typeof($(this).data('superselctor-value')) != "undefined" ? $(this).data('superselctor-value') : $(this).preSupSelVal();
+  }else{
+    var result = typeof($(this).data('superselctor-value')) != "undefined" ? $(this).data('superselctor-value', value) : $(this).preSupSelVal(value);
+    $(this).trigger("valueSet")
+    return result;
+  }
+}
