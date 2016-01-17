@@ -7,7 +7,6 @@
 		continuedFocus:false, //flag to show if item has just been selected
 
 		options: {
-			icon:"fa-caret-down",
 			items:{}, //list of items to be included in list
 		},
 
@@ -22,7 +21,6 @@
   				element.addClass("superselector");
 
   				element.data("superselctor-value", ""); //define value data paremeter so jquery knows to use that for the  select boxes value
-  				//element.after("<i class='fa " + options.icon + " superselector-icon' style='color:#000;'></i>");
 
   				//add space for caret
   				element.css({"padding-right":"20px"});
