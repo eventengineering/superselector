@@ -1,4 +1,4 @@
-![Super Selector](http://eventengineering.github.io/superselector/images/title.jpg?)
+![Super Selector](http://eventengineering.github.io/superselector/images/title.jpg?i=1)
 
 A JQuery UI enhancement of the standard HTML Select element
 
