@@ -1,5 +1,4 @@
-SuperSelector
-================================
+![Super Selector](http://eventengineering.github.io/superselector/images/title.jpg?)
 
 A JQuery UI enhancement of the standard HTML Select element
 
@@ -7,6 +6,9 @@ A JQuery UI enhancement of the standard HTML Select element
 
 Full documentation & demos can be found at: [http://eventengineering.github.io/superselector](http://eventengineering.github.io/superselector)
 
+
+Features
+================================
 Super selector comes with a wide range of aditional feautres above the standard select element:
 - Theming of list elements with CSS
 - Grouping of list elements
