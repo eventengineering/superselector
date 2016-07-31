@@ -119,31 +119,35 @@
 
                 <div class="col-md-9 col-xs-12 content" role="main">
                     <a class="anchor" id="setup"></a>
-                    <article>
+                     <article>
                         <h1>Setup</h1>
-
                         <p>Setting up superselector could not be simpler.</p>
+                        <p>Include the css and the library</p>
+                        <pre class="prettyprint lang-html"> &lt;link rel="stylesheet" href="superselector.min.css"&gt;
+ &lt;script type="text/javascript" src="superselector.js"&gt;  &lt;/script&gt; </pre>
 
-                        <p>Include the library in your project and you are good to go!</p>
+                        <p>Create an input element to be the SuperSelctor.</p>
+                        <pre class="prettyprint lang-html">&lt;div id="example-selector"&gt&lt;/div&gt</pre>
 
-                        <pre class="prettyprint lang-php">include("SuperSelector.php");</pre>
-
-                    </article>
-                    <a class="anchor" id="convert"></a>
+                        <p>Turn the element into a superselector with some simple javascript</p>
+                        <pre class="prettyprint lang-js">$("#example-selector").superselector({
+    items:[ //array of items for the SuperSelector
+        {value:"first", title:"First Item"},
+        {value:"second", title:"Second Item"},
+    ]
+});</pre>
+                    <a class="anchor" id="setting"></a>
                     <article>
-                        <h1>Convert A Unit</h1>
-
-                        <p>To convert a unit, create an instance of SuperSelector passsing two arguments to the constructor. The first argument is the <span class='param'>value</span> to be converted from, the second argument is a case sensitive string representing its <span class='param'>unit</span>. This returns a SuperSelector object that will refrenece all its conversions to your initial unit and value.</p>
-
-                        <p>You can then call the <span class='param'>to()</span> function on the SuperSelector object, passing the desired <span class='param'>output unit</span> as the first argument.</p>
-
-                        <pre class="prettyprint lang-php">$demoSuperSelector = new SuperSelector(10, "m");
-$demoSuperSelector->to("ft"); //returns converted value</pre>
-
-                            <p class="info"><strong>Result: </strong> 10 Meters = 32.808398950131 Feet</p>
-
-                            <p>A full list of available units can be found in the <a href="../docs#units">Available Units</a> section.</p>
-                        </article>
+                        <h1>Setting The Value</h1>
+                        <p>The value of a SuperSelector can be set using the standard jquery <span class='param'>val()</span> function.</p>
+                        <pre class="prettyprint lang-js">$("#example-selector").val("first"); // set selector to value of "first"</pre>
+                    </article>
+                    <a class="anchor" id="getting"></a>
+                    <article>
+                        <h1>Getting The Value</h1>
+                        <p>The value of a SuperSelector can be read using the standard jQuery <span class='param'>val()</span> function.</p>
+                        <pre class="prettyprint lang-js">var value = $("#example-selector").val(); // get selector value</pre>
+                    </article>
 
                     </div>
 
@@ -151,7 +155,8 @@ $demoSuperSelector->to("ft"); //returns converted value</pre>
                         <nav class="docs-sidebar hidden-print hidden-xs hidden-sm affix">
                             <ul class="nav docs-sidenav">
                                 <li><a href="#setup">Setup</a></li>
-                                <li><a href="#basic-example">Convert Unit</a></li>
+                                <li><a href="#setting">Setting The Value</a></li>
+                                <li><a href="#getting">Getting The Value</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -183,7 +188,7 @@ $demoSuperSelector->to("ft"); //returns converted value</pre>
             <script src="../js/bootstrap.min.js"></script>
 
             <!-- Tabulator -->
-            <script src="js/superselector.js"></script>
+            <script src="../js/superselector.js"></script>
 
             <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?style=desert"></script>
 

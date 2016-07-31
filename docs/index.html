@@ -124,271 +124,179 @@
                     <a class="anchor" id="setup"></a>
                     <article>
                         <h1>Setup</h1>
-
                         <p>Setting up superselector could not be simpler.</p>
+                        <p>Include the css and the library</p>
+                        <pre class="prettyprint lang-html"> &lt;link rel="stylesheet" href="superselector.min.css"&gt;
+ &lt;script type="text/javascript" src="superselector.js"&gt;  &lt;/script&gt; </pre>
 
-                        <p>Include the library in your project and you are good to go!</p>
+                        <p>Create an input element to be the SuperSelctor.</p>
+                        <pre class="prettyprint lang-html">&lt;div id="example-selector"&gt&lt;/div&gt</pre>
 
-                        <pre class="prettyprint lang-php">include("SuperSelector.php");</pre>
-
+                        <p>Turn the element into a superselector with some simple javascript</p>
+                        <pre class="prettyprint lang-js">$("#example-selector").superselector({
+    items:[ //array of items for the SuperSelector
+        {value:"first", title:"First Item"},
+        {value:"second", title:"Second Item"},
+    ]
+});</pre>
                     </article>
-                    <a class="anchor" id="convert"></a>
+                    <a class="anchor" id="definition"></a>
                     <article>
-                        <h1>Convert A Unit</h1>
+                        <h1>Defining Items List</h1>
+                        <p>When you create your SuperSelector, you can define the items to be chosen from the selection list in the <span class='param'>items</span> array.</p>
+                        <pre class="prettyprint lang-js">$("#example-selector").superselector({
+    items:[
+        {value:"first", title:"First Item"},
+        {value:"second", title:"Second Item"},
+        {type:"title", title:"Group Title"},
+        {value:"third", title:"Third Item"},
+        {value:"fourth", title:"Disabled Item", disabled:true},
+        {value:"fifth", title:"Fifth Item"},
+        {type:"seperator"},
+        {value:"sixth", title:"Sixth Item"},
+    ],
+})</pre>
+                        <p>Each item in the array is an object containing info for each line item.</p>
 
-                        <p>To convert a unit, create an instance of SuperSelector passsing two arguments to the constructor. The first argument is the <span class='param'>value</span> to be converted from, the second argument is a case sensitive string representing its <span class='param'>unit</span>. This returns a SuperSelector object that will refrenece all its conversions to your initial unit and value.</p>
+                        <h2>Item Types</h2>
+                        <p>There are three types of line item available in the Superselector.</p>
 
-                        <p>You can then call the <span class='param'>to()</span> function on the SuperSelector object, passing the desired <span class='param'>output unit</span> as the first argument.</p>
+                        <h3>Standard Item</h3>
+                        <p>A standard item defines the <span class='param'>value</span> to be returned when the item is selected and the <span class='param'>title</span> to be displayed for that item.</p>
+                        <pre class="prettyprint lang-js">{value:"first", title:"First Item"},</pre>
 
-                        <pre class="prettyprint lang-php">$demoSuperSelector = new SuperSelector(10, "m");
-$demoSuperSelector->to("ft"); //returns converted value</pre>
+                        <p>There is an optional <span class='param'>disabled</span> paramater to set the item to be disabled. in this state it appears greyed out in the list and cannot be selected.</p>
+                        <pre class="prettyprint lang-js">{value:"fourth", title:"Disabled Item", disabled:true},</pre>
 
-                        <p class="info"><strong>Result: </strong> 10 Meters = 32.808398950131 Feet</p>
+                        <h3>Title Item</h3>
+                        <p>A title item will show up in bold in the list with a darker background and a bigger font. a title item cannot be selected</p>
+                        <pre class="prettyprint lang-js">{type:"title", title:"Group Title"},</pre>
 
-                        <p>A full list of available units can be found in the <a href="#units">Available Units</a> section.</p>
+                        <h3>Seperator Item</h3>
+                        <p>A seperator item appears as a horizontal line in the list.</p>
+                        <pre class="prettyprint lang-js">{type:"seperator"},</pre>
                     </article>
-                    <a class="anchor" id="multiple"></a>
+                    <a class="anchor" id="setting"></a>
                     <article>
-                        <h1>Convert to Multiple Units</h1>
+                        <h1>Setting The Value</h1>
+                        <p>The value of a SuperSelector can be set using the standard jquery <span class='param'>val()</span> function.</p>
+                        <pre class="prettyprint lang-js">$("#example-selector").val("first"); // set selector to value of "first"</pre>
+                        <p>If the set value is not in the list, then it is displayed in the input box as the value rather than a specified title.</p>
 
-                        <p>Once you have setup your SuperSelector instance you can convert the same value into multiple units by calling the <span class='param'>to()</span> function multiple times.</p>
+                        <p>If you wish to set the SuperSelector to a value not in the list, and display a seperate title then you can set the value with an item object instead.</p>
+                        <pre class="prettyprint lang-js">$("#example-selector").val({value:"unlisted_value", title:"Unlisted Value"}); //set the SuperSelectors value to one that isnt in the list, and display a custom title for it.</pre>
+                    </article>
+                    <a class="anchor" id="getting"></a>
+                    <article>
+                        <h1>Getting The Value</h1>
+                        <p>The value of a SuperSelector can be read using the standard jQuery <span class='param'>val()</span> function.</p>
+                        <pre class="prettyprint lang-js">var value = $("#example-selector").val(); // get selector value</pre>
+                    </article>
+                    <a class="anchor" id="manipulation"></a>
+                    <article>
+                        <h1>Manipulating List Items</h1>
+                        <p>Once your super selector has been created it is possible to change the items in the list using a variety of functions.</p>
 
-                        <pre class="prettyprint lang-php">$demoSuperSelector = new SuperSelector(10, "m");
-$demoSuperSelector->to("km"); //returns converted value in kilometers
-$demoSuperSelector->to("ft"); //returns converted value in feet</pre>
+                        <h2>Disable/Enable Item</h2>
+                        <p>To enable or disable an item, use the <span class='param'>disableItem</span> function. The first argumnet should be the value of the item to be changed. The second argument is wheather the element is to be disabled (<span class='param'>true</span>) or enabled (<span class='param'>param</span>).</p>
+                        <pre class="prettyprint lang-js">$("#example-selector").tabulator("disableItem","first", true); //Disable the first item in the list using the items value;</pre>
+                        <p>You can also pass the object representing the item instead of its value.</p>
+                        <pre class="prettyprint lang-js">var firstItem = {value:"first", title:"First Item"};
+$("#example-selector").tabulator("disableItem",firstItem, false); //Enable the first item in the list using the items object;</pre>
 
-                        <p class="info">
-                        <strong>Results: </strong><br>
-                        10 Meters = 0.01 kilometre <br>
-                        10 Meters = 32.808398950131 Feet
-                        </p>
+                        <h2>Remove Item</h2>
+                        <p>To remove an item from the list, use the removeItem function, passing items value.</p>
+                        <pre class="prettyprint lang-js">$("#example-selector").tabulator("removeItem","first"); //Remove the first item in the list using the items value;</pre>
+                        <p>You can also pass the object representing the item instead of its value.</p>
+                        <pre class="prettyprint lang-js">var firstItem = {value:"first", title:"First Item"};
+$("#example-selector").tabulator("removeItem",firstItem); //Remove the first item in the list using the items object;</pre>
 
-                        <h2>Multiple Unit Array Output</h2>
-                        <p>Alternatively, you can pass an array of <span class='param'>units</span> to the <span class='param'>to()</span> function. This will return an associative array containting all of the conversions.</p>
-                        <pre class="prettyprint lang-php">$demoSuperSelector->to(["km","ft","in"]); //returns an array of converted values in kilometers, feet and inches</pre>
-                        <p>The result of the above function would be:</p>
-                        <pre class="prettyprint lang-php">[
-    "km" => 0.01,
-    "ft" => 32.808398950131,
-    "in" => 393.70078740157
+                        <h2>Replace Item</h2>
+                        <p>To replace an item, use the <span class='param'>replaceItem</span> function. The first argumnet should be the item to be replaced, this should either be the value of the item, or an object of the items definition. The second should be an object representing the new value.</p>
+                        <pre class="prettyprint lang-js">var newItem = {value:"new", title:"New Item"};
+$("#example-selector").tabulator("replaceItem","first", newItem); //Replace the first item in the list using the items value, with the newItem object;</pre>
+                        <pre class="prettyprint lang-js">var firstItem = {value:"first", title:"First Item"};
+var newItem = {value:"new", title:"New Item"};
+$("#example-selector").tabulator("replaceItem",firstItem, newItem); //Replace the first item in the list using the items object, with the newItem object;</pre>
+
+                        <h2>Add Item</h2>
+                        <p>To and an item to the end of the list, use the <span class='param'>addItem</span> function. The first argument is the new items object.</p>
+                        <pre class="prettyprint lang-js">var newItem = {value:"new", title:"New Item"};
+$("#example-selector").tabulator("addItem", newItem); //Add the new item to the end off the list;</pre>
+
+                        <h2>Insert Item</h2>
+                        <p>To replace an item, use the <span class='param'>insertItem</span> function. The first argumnet should be the item to be that you want to insert the item next to, this should either be the value of the item, or an object of the items definition. The second should be an object representing the new value. The third argument is a boolean value representing weather the new item is to be isnerted before (true) or after (false) the specified first item</p>
+                        <pre class="prettyprint lang-js">var newItem = {value:"new", title:"New Item"};
+$("#example-selector").tabulator("replaceItem","first", newItem, true); //Insert the new item before the first item in the list;</pre>
+
+                        <h2>Get Item From value</h2>
+                        <p>To get the object of an item based on its value, use the <span class='param'>getItem</span> function. pass the value of the item to the function and it will return the object representing the item.</p>
+                        <pre class="prettyprint lang-js">$("#example-selector").tabulator("getItems"); //Returns and array of objets for all items in the list;</pre>
+                        <p>The function will return false if no item with a matching value is found.</p>
+
+                        <h2>Get All Items</h2>
+                        <p>To get the objects for all items in a SuperSelector, use the <span class='param'>getItems</span> function.</p>
+                        <pre class="prettyprint lang-js">$("#example-selector").tabulator("getItems"); //Returns and array of objets for all items in the list;</pre>
+                        <p>Example Returned List:</p>
+                        <pre class="prettyprint lang-js">[
+    {value:"first", title:"First Item"},
+    {value:"second", title:"Second Item"},
+    {type:"title", title:"Group Title"},
+    {value:"third", title:"Third Item"},
+    {value:"fourth", title:"Disabled Item", disabled:true},
+    {value:"fifth", title:"Fifth Item"},
+    {type:"seperator"},
+    {value:"sixth", title:"Sixth Item"},
 ]</pre>
+
+                        <h2>Set New Items List</h2>
+                        <p>To set a completly new list in the SuperSelector, use the <span class='param'>setItems</span> function, passing an array of new item objects.</p>
+                        <pre class="prettyprint lang-js">var newItems = items:[
+    {value:"newFirst", title:"1st Item"},
+    {value:"newSecond", title:"Second Item"},
+    {value:"newThird", title:"3rd Item"},
+];
+
+$("#example-selector").tabulator("setItems", newItems); //clear the old list and add a new list;</pre>
                     </article>
-                    <a class="anchor" id="all"></a>
+                    <a class="anchor" id="css"></a>
                     <article>
-                        <h1>Convert to All Compatible Units</h1>
-                        <p>You can convert a value to all compatible units using the <span class='param'>toAll()</span> function</p>
-                        <pre class="prettyprint lang-php">$demoSuperSelector = new SuperSelector(10, "m");
-$demoSuperSelector->toAll(); //returns all compatible converted value</pre>
-                        <p>This will return an associative array containing the conversions for all compatible units, in the case of "meters" as an inital unit, SuperSelector will return all available distance unit conversions.</p>
-                        <pre class="prettyprint lang-php">[
-    "m" => 10,
-    "km" => 0.01,
-    "dm" => 100,
-    "cm" => 1000,
-    "mm" => 10000,
-    "μm" => 10000000,
-    "nm" => 10000000000,
-    "pm" => 10000000000000,
-    "in" => 393.70078740157,
-    "ft" => 32.808398950131,
-    "yd" => 10.936132983377,
-    "mi" => 0.0062137119223733
-]</pre>
-                    </article>
-                    <a class="anchor" id="list"></a>
-                    <article>
-                        <h1>List Compatible Units</h1>
-                        <p>You can generate a list of all compatible units using the <span class='param'>getUnits()</span> function.</p>
-                        <pre class="prettyprint lang-php">$demoSuperSelector = new SuperSelector();
-$demoSuperSelector->getUnits("m"); //returns converted value</pre>
-                        <p>This will return an array of all available units compatible with the specified unit:</p>
-                        <pre class="prettyprint lang-php">["m", "km", "dm", "cm", "mm", "μm", "nm", "pm", "in", "ft", "yd", "mi"]</pre>
-                    </article>
-                    <a class="anchor" id="change"></a>
-                    <article>
-                        <h1>Change Initial Value</h1>
-                        <p>You can change the value and unit you are converting from at any point using the <span class='param'>from()</span> function.</p>
-                        <pre class="prettyprint lang-php">$demoSuperSelector = new SuperSelector(10,"m");
-$demoSuperSelector->to("ft"); //returns converted value in feet
-$demoSuperSelector->from(5.23,"km"); //sets new from value in new unit
-$demoSuperSelector->to("mi"); //returns converted new value in miles</pre>
-                        <p class="info"><strong>Results:</strong><br>
-                        10 Meters = 32.808398950131 Feet<br>
-                        5.23 Kilometers = 3.2497713354013 Miles
-                        </p>
-                    </article>
-                    <a class="anchor" id="list"></a>
-                    <article>
-                        <h1>Result Precision</h1>
-                        <p>The precision of the results can be set using two optional arguments in the <span class='param'>to()</span> function to specify the decimal precision and use of rounding.</p>
-                        <p>In adition to the standard first argument of the <span class='param'>conversion unit</span>, the second argument is an integer representing the <span class='param'>decimal precision</span> of the result, the third argument is a booolean that indicates wheather the result should be rounded (<span class='param'>true</span>, default value) or truncated (<span class='param'>false</span>).</p>
-                        <pre class="prettyprint lang-php">$precisionSuperSelector->to("ft", 4, true);</pre>
-                        <p class="info"><strong>Result:</strong> 10 Meters = 32.8084 Feet (rounded to 4 decimal places)</p>
-                    </article>
-                    <a class="anchor" id="add"></a>
-                    <article>
-                        <h1>Adding Custom Units</h1>
-                        <p>It is possibly to add your own unit to SuperSelector using the <span class='param'>addUnit()</span> function.</p>
+                        <h1>CSS Clases</h1>
+                        <p>SuperSelector elements are assigned a range of CSS classes to make it easier for you to manipulate the look, feel and function of the selector.</p>
 
-                        <p>The function takes three parameters, the first is the string symbol for the new <span class='param'>unit</span>, the second argument is the <span class='param'>base unit</span> for the conversion, this determines which category the unit can be converted in (more information on base usits can be found below), the third argument is the <span class='param'>conversion function</span> of the new unit to the base unit, if it is a simple multiplier/divisior then you can pass a number for this argument, if it is more complex then a callback can be used.</p>
+                        <table>
+                            <thead>
+                                <th>Class</th>
+                                <th>Element Description</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>superselector-wrapper</td>
+                                    <td>A wrapper round the input element to contain the carret icon</td>
+                                </tr>
+                                <tr>
+                                    <td>superselector</td>
+                                    <td>The input element that is the SuperSelector</td>
+                                </tr>
+                                <tr>
+                                    <td>superselector-list</td>
+                                    <td>The value lookup list</td>
+                                </tr>
+                                <tr>
+                                    <td>choice</td>
+                                    <td>A standard item in the lookup list</td>
+                                </tr>
+                                <tr>
+                                    <td>seperator</td>
+                                    <td>A seperator item in the lookup list</td>
+                                </tr>
+                                <tr>
+                                    <td>title</td>
+                                    <td>A title item in the lookup list</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                        <pre class="prettyprint lang-php">//add the kilometre unit
-$precisionSuperSelector->addUnit("km", "m", 1000); //add the kilometre unit to the length conversion base unit "m", a kilometer is 1000m;
-
-//add Fahrenheit to the temperature category, this has a complex conversion calculation so uses a callback
-var fahrenheitConversion = function($val, $tofrom){
-    //$val - value to convert
-    //$tofrom - wheather it is being converted to or from the base unit (true - to base unit, false - from base unit to current unit)
-
-    return $tofrom ? ($val * 9/5 - 459.67) : (($val + 459.67) * 5/9);
-}
-
-$precisionSuperSelector->addUnit("f", "k", fahrenheitConversion); //add the Fahrenheit unit to the temperature conversion base unit "k", ;
-
-//create a new base unit for a sound category, with a base unit of dB
-$precisionSuperSelector->addUnit("dB", "dB", 1); //create the base unit of dB, a base unit should alwasys have a conversion value of 1;
-                        </pre>
-
-                        <h2>Base Units</h2>
-                        <p>SuperSelector works by storing each type of unit as a conversion function from a base unit. This way only one conversion function  needs to be stored with each unit to enable conversion between any in the same category.</p>
-                        <p>When a conversion is requested SuperSelector will first convert the provided value into the base unit for that category, then convert it into the chosen output units.</p>
-                        <p>The base unit for each category can be found highligted in the <a href="#units">Available Units</a> section.</p>
-
-                    </article>
-                    <a class="anchor" id="remove"></a>
-                    <article>
-                        <h1>Removing Units</h1>
-                        <p>If you want to remove a unit from SuperSelector to make room for one with the same symbol string, you can use the <span class='param'>removeUnit()</span> function. this function takes one argument, which is the string representing the unit symbol.</p>
-                        <pre class="prettyprint lang-php">$demoSuperSelector = new SuperSelector();
-$demoSuperSelector->removeUnit("km"); //remove kilometre unit</pre>
-                    </article>
-                    <a class="anchor" id="units"></a>
-                    <article>
-                        <h1>Available Units</h1>
-                        <p>SuperSelector comes with a large number of standard units build in. this section details all of these units by category.</p>
-                        <p>The base unit for each category is highlighted in <strong>bold</strong>.</p>
-                        <a class="anchor" id="unit-length"></a>
-                        <h2>Length</h2>
-                        <ul>
-                            <li><strong>m - Meter</strong></li>
-                            <li>km - Kilometer</li>
-                            <li>dm - Decimeter</li>
-                            <li>cm - Centimeter</li>
-                            <li>mm - Milimeter</li>
-                            <li>μm - Micrometer</li>
-                            <li>nm - Nanometer</li>
-                            <li>pm - Picometer</li>
-                            <li>in - Inch</li>
-                            <li>ft - Foot</li>
-                            <li>yd - Yard</li>
-                            <li>mi - Mile</li>
-                            <li>h - Hand</li>
-                            <li>ly - LightYear</li>
-                            <li>au - Astronomical Unit</li>
-                            <li>pc - Parsec</li>
-                        </ul>
-
-                        <a class="anchor" id="unit-area"></a>
-                        <h2>Area</h2>
-                        <ul>
-                            <li><strong>m2 - Square Meter</strong></li>
-                            <li>km2 - Square Kilometer</li>
-                            <li>cm2 - Square Centimeter</li>
-                            <li>mm2 - Square Milimeter</li>
-                            <li>ft2 - Square Foot</li>
-                            <li>mi2 - Square Mile</li>
-                            <li>ac - Acre</li>
-                            <li>ha - hectare</li>
-                        </ul>
-
-                        <a class="anchor" id="unit-volume"></a>
-                        <h2>Volume</h2>
-                        <ul>
-                            <li><strong>l - Litre</strong></li>
-                            <li>ml - Mililitre</li>
-                            <li>m3 - Cubic Meter</li>
-                            <li>pt - Pint</li>
-                            <li>gal - Galon</li>
-                        </ul>
-
-                        <a class="anchor" id="unit-weight"></a>
-                        <h2>Weight</h2>
-                        <ul>
-                            <li><strong>kg - Kilogram</strong></li>
-                            <li>g - Gram</li>
-                            <li>mg - Miligram</li>
-                            <li>N - Newton (based on earth gravity)</li>
-                            <li>st - Stone</li>
-                            <li>lb - Pound</li>
-                            <li>oz - Ounce</li>
-                            <li>t - Metric Tonne</li>
-                            <li>ukt - UK Long Ton</li>
-                            <li>ust - US short Ton</li>
-                        </ul>
-
-                        <a class="anchor" id="unit-speed"></a>
-                        <h2>Speed</h2>
-                        <ul>
-                            <li><strong>mps - Meters per Second</strong></li>
-                            <li>kph - Kilometers Per Hour</li>
-                            <li>mph - Miles Per Hour</li>
-                        </ul>
-
-                        <a class="anchor" id="unit-rotation"></a>
-                        <h2>Rotation</h2>
-                        <ul>
-                            <li><strong>deg - Degrees</strong></li>
-                            <li>rad - Radian</li>
-                        </ul>
-
-                        <a class="anchor" id="unit-temperature"></a>
-                        <h2>Temperature</h2>
-                        <ul>
-                            <li><strong>k - Kelvin</strong></li>
-                            <li>c - Centigrade</li>
-                            <li>f - Fahrenheit</li>
-                        </ul>
-
-                        <a class="anchor" id="unit-pressure"></a>
-                        <h2>Pressure</h2>
-                        <ul>
-                            <li><strong>pa - Pascal</strong></li>
-                            <li>kpa - kilopascal</li>
-                            <li>mpa - MegaPascal</li>
-                            <li>bar - Bar</li>
-                            <li>mbar - Milibar</li>
-                            <li>psi - Pound-force per square inch</li>
-                        </ul>
-
-                        <a class="anchor" id="unit-time"></a>
-                        <h2>Time</h2>
-                        <ul>
-                            <li><strong>s - Second</strong></li>
-                            <li>year - Year (365 days)</li>
-                            <li>month - Month (31 days)</li>
-                            <li>week - Week</li>
-                            <li>day - Day</li>
-                            <li>hr - Hour</li>
-                            <li>min - Minute</li>
-                            <li>ms - Milisecond</li>
-                            <li>μs - Microsecond</li>
-                            <li>ns - Nanosecond</li>
-                        </ul>
-
-                        <a class="anchor" id="unit-energy"></a>
-                        <h2>Energy/Power</h2>
-                        <ul>
-                            <li><strong>j - Joule</strong></li>
-                            <li>kj - Kilojoule</li>
-                            <li>mj - Megajoule</li>
-                            <li>cal - Calorie</li>
-                            <li>Nm - Newton Meter</li>
-                            <li>ftlb - Foot Pound</li>
-                            <li>whr - Watt Hour</li>
-                            <li>kwhr - Kilowatt Hour</li>
-                            <li>mwhr - Megawatt Hour</li>
-                            <li>mev - Mega Electron Volt</li>
-                        </ul>
                     </article>
                 </div>
 
@@ -396,25 +304,11 @@ $demoSuperSelector->removeUnit("km"); //remove kilometre unit</pre>
                     <nav class="docs-sidebar hidden-print hidden-xs hidden-sm affix">
                         <ul class="nav docs-sidenav">
                             <li><a href="#setup">Setup</a></li>
-                            <li><a href="#convert">Convert Unit</a></li>
-                            <li><a href="#multiple">Convert to Multiple Units</a></li>
-                            <li><a href="#all">Convert to All Compatible Units</a></li>
-                            <li><a href="#list">List Compatible Units </a></li>
-                            <li><a href="#change">Change Initial Value</a></li>
-                            <li><a href="#precision">Result Preceision</a></li>
-                            <li><a href="#add">Adding Custom Units</a></li>
-                            <li><a href="#remove">Removing Units</a></li>
-                            <li><a href="#units">Available Units</a></li>
-                            <li><a  class="indent" href="#unit-length">Length</a></li>
-                            <li><a  class="indent" href="#unit-area">Area</a></li>
-                            <li><a  class="indent" href="#unit-volume">Volume</a></li>
-                            <li><a  class="indent" href="#unit-weight">Weight</a></li>
-                            <li><a  class="indent" href="#unit-speed">Speed</a></li>
-                            <li><a  class="indent" href="#unit-rotation">Rotation</a></li>
-                            <li><a  class="indent" href="#unit-temperature">Temperature</a></li>
-                            <li><a  class="indent" href="#unit-pressure">Pressure</a></li>
-                            <li><a  class="indent" href="#unit-time">Time</a></li>
-                            <li><a  class="indent" href="#unit-energy">Energy/Power</a></li>
+                            <li><a href="#definition">Defining Items List</a></li>
+                            <li><a href="#setting">Setting The Value</a></li>
+                            <li><a href="#getting">Getting The Value</a></li>
+                            <li><a href="#manipulation">Manipulating List Items</a></li>
+                            <li><a href="#css">CSS Classes</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -445,7 +339,7 @@ $demoSuperSelector->removeUnit("km"); //remove kilometre unit</pre>
         <!-- Bootstrap Core JavaScript -->
         <script src="../js/bootstrap.min.js"></script>
 
-        <script src="js/superselector.js"></script>
+        <script src="../js/superselector.js"></script>
 
         <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?style=desert"></script>
 
