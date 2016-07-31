@@ -32,6 +32,7 @@
 
           element.css({"margin-right":"0"});
           wrapper.css({"margin-right":rightMargin});
+          wrapper.attr("data-listid", element.attr("id"));
 
           element.wrap(wrapper);
 
@@ -475,7 +476,7 @@
         $(".superselector-list").remove();
 
         self.list = $("<div class='superselector-list'></div>");
-
+        self.list.attr("data-listid", self.element.attr("id"));
         self.list.append(self._renderList(self.options.items));
 
         //position list on screen
