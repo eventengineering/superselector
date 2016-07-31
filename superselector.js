@@ -63,10 +63,10 @@
                 element.blur();
               }else{
                 self.render();
-                element.prop("readonly", true); //hide cursor by seeting object to read only
+                element.prop("readonly", true); //hide cursor by setting object to read only
               }
             }else{
-              element.prop("readonly", true); //hide cursor by seeting object to read only
+              element.prop("readonly", true); //hide cursor by setting object to read only
               self.continuedFocus = false;
             }
 
@@ -85,15 +85,6 @@
               self.render();
             }
 
-          });
-
-          // clean up on blur
-          element.blur(function(e){
-            if(self.blurOrigin.closest(".superselector-list").length != 1){
-              self.list.remove();
-              element.prop("readonly", false);
-              self._restore();
-            }
           });
 
           //handle value changed by jquery .val() method
@@ -466,9 +457,19 @@
         self.list.css({"min-width": position.width + "px"});
       },
 
+      //blur element
+      blur:function(){
+        var self = this;
+
+        self.list.remove();
+        self._restore();
+        setTimeout(function(){
+          self.element.prop("readonly", false);
+        },10)
+      },
+
       //construct and display option list
       render:function(){
-
         var self = this;
 
         $(".superselector-list").remove();
@@ -482,8 +483,10 @@
 
         //handle bluring from list
         var setBlur = function(e){
-          self.blurOrigin = $(e.target);
-          $(document).off("mousedown", setBlur);
+          if($(e.target).closest(".superselector-list").length != 1){
+            $(document).off("mousedown", setBlur);
+            self.blur();
+          }
         }
         $(document).on("mousedown", setBlur);
 
