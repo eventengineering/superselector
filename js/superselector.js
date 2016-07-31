@@ -22,9 +22,6 @@
 
   				element.data("superselctor-value", ""); //define value data paremeter so jquery knows to use that for the  select boxes value
 
-  				//add space for caret
-  				element.css({"padding-right":"20px"});
-
   				//build wrapper to hold caret, cannot put :after element on an input;
   				var wrapper = $("<span class='superselector-wrapper'></span>");
 
@@ -92,7 +89,7 @@
 
   				// clean up on blur
   				element.blur(function(e){
-  					if(superselector.blurOrigin.closest(".superselector-list").length != 1){
+  					if(self.blurOrigin.closest(".superselector-list").length != 1){
   						self.list.remove();
   						element.prop("readonly", false);
   						self._restore();
@@ -470,13 +467,23 @@
 
 
   			//position list on screen
+
   			var position = self.element[0].getBoundingClientRect();
+
   			self.list.css({top: (position.top + position.height - 1) + "px", left: position.left + "px"})
 
   			self.list.css({"min-width": position.width + "px"});
 
   			//show list
   			$("body").append(self.list);
+
+        var setBlur = function(e){
+          self.blurOrigin = $(e.target);
+
+          $(document).off("mousedown", setBlur);
+        }
+
+        $(document).on("mousedown", setBlur);
 
   			$("li.choice:not(.disabled)",self.list).on("mouseover", function(e){
   				self._setActive($(this));
@@ -573,16 +580,6 @@
 
   	});
 })(jQuery);
-
-//Global object to hold blur origins to allow clean exit of lookup list
-var superselector = {blurOrigin:$("")};
-
-
-
-//Capture new focused emelemt to allow list to be gracefully closed
-$(document).mousedown(function(e) {
-  superselector.blurOrigin = $(e.target);
-});
 
 //Override jquery val() fucntion to allow superselector to function as standard input
 $.fn.preSupSelVal = $.fn.val

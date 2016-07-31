@@ -13,7 +13,7 @@
 
 		margin-left:-17px;
 		vertical-align: middle;
-		// margin-top:10px;
+		margin-right:10px;
 
 		pointer-events: none;
 
@@ -29,16 +29,17 @@
 	box-sizing: border-box;
 
 	vertical-align: middle;
+	padding-right:20px;
 
 
 }
 
 .superselector, .superselector-list{
-	font-size: .8em;
+	// font-size: .8em;
 }
 
 .superselector-list{
-	position: absolute;
+	position: fixed;
 	display:inline-block;
 	background:#fff;
 
@@ -53,6 +54,11 @@
 	overflow: auto;
 
 	z-index:10000;
+
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-o-user-select: none;
 
 	ul{
 
@@ -76,7 +82,7 @@
 
 				&.disabled{
 					color: #ccc;
-					cursor:auto !important;
+					cursor:not-allowed !important;
 				}
 			}
 
