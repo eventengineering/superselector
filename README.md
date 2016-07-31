@@ -3,7 +3,7 @@ SuperSelector
 
 A JQuery UI enhancement of the standard HTML Select element
 
-![Example Super Selector]([http://eventengineering.github.io/superselector](http://eventengineering.github.io/superselector/images/example.jpg?")
+![Example Super Selector](http://eventengineering.github.io/superselector/images/example.jpg?)
 
 Full documentation & demos can be found at: [http://eventengineering.github.io/superselector](http://eventengineering.github.io/superselector)
 
