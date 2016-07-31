@@ -454,6 +454,18 @@
         self.element[0].value = item.data("data").selectedTitle ? item.data("data").selectedTitle : item.data("data").title;
       },
 
+      //position list on screen
+      positionList: function(){
+        var self = this;
+
+        //position list on screen
+        var position = self.element[0].getBoundingClientRect();
+
+        self.list.css({top: (position.top + position.height - 1) + "px", left: position.left + "px"})
+
+        self.list.css({"min-width": position.width + "px"});
+      },
+
   		//construct and display option list
   		render:function(){
 
@@ -465,25 +477,24 @@
 
   			self.list.append(self._renderList(self.options.items));
 
-
   			//position list on screen
+  			self.positionList();
 
-  			var position = self.element[0].getBoundingClientRect();
+        //handle bluring from list
+        var setBlur = function(e){
+          self.blurOrigin = $(e.target);
+          $(document).off("mousedown", setBlur);
+        }
+        $(document).on("mousedown", setBlur);
 
-  			self.list.css({top: (position.top + position.height - 1) + "px", left: position.left + "px"})
+        //handle window movement
+        $(window).on("scroll", function(){
+          self.positionList();
+        });
 
-  			self.list.css({"min-width": position.width + "px"});
 
   			//show list
   			$("body").append(self.list);
-
-        var setBlur = function(e){
-          self.blurOrigin = $(e.target);
-
-          $(document).off("mousedown", setBlur);
-        }
-
-        $(document).on("mousedown", setBlur);
 
   			$("li.choice:not(.disabled)",self.list).on("mouseover", function(e){
   				self._setActive($(this));
