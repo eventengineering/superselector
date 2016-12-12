@@ -198,44 +198,44 @@
 
                         <h2>Disable/Enable Item</h2>
                         <p>To enable or disable an item, use the <span class='param'>disableItem</span> function. The first argumnet should be the value of the item to be changed. The second argument is wheather the element is to be disabled (<span class='param'>true</span>) or enabled (<span class='param'>param</span>).</p>
-                        <pre class="prettyprint lang-js">$("#example-selector").tabulator("disableItem","first", true); //Disable the first item in the list using the items value;</pre>
+                        <pre class="prettyprint lang-js">$("#example-selector").superselector("disableItem","first", true); //Disable the first item in the list using the items value;</pre>
                         <p>You can also pass the object representing the item instead of its value.</p>
                         <pre class="prettyprint lang-js">var firstItem = {value:"first", title:"First Item"};
-$("#example-selector").tabulator("disableItem",firstItem, false); //Enable the first item in the list using the items object;</pre>
+$("#example-selector").superselector("disableItem",firstItem, false); //Enable the first item in the list using the items object;</pre>
 
                         <h2>Remove Item</h2>
                         <p>To remove an item from the list, use the removeItem function, passing items value.</p>
-                        <pre class="prettyprint lang-js">$("#example-selector").tabulator("removeItem","first"); //Remove the first item in the list using the items value;</pre>
+                        <pre class="prettyprint lang-js">$("#example-selector").superselector("removeItem","first"); //Remove the first item in the list using the items value;</pre>
                         <p>You can also pass the object representing the item instead of its value.</p>
                         <pre class="prettyprint lang-js">var firstItem = {value:"first", title:"First Item"};
-$("#example-selector").tabulator("removeItem",firstItem); //Remove the first item in the list using the items object;</pre>
+$("#example-selector").superselector("removeItem",firstItem); //Remove the first item in the list using the items object;</pre>
 
                         <h2>Replace Item</h2>
                         <p>To replace an item, use the <span class='param'>replaceItem</span> function. The first argumnet should be the item to be replaced, this should either be the value of the item, or an object of the items definition. The second should be an object representing the new value.</p>
                         <pre class="prettyprint lang-js">var newItem = {value:"new", title:"New Item"};
-$("#example-selector").tabulator("replaceItem","first", newItem); //Replace the first item in the list using the items value, with the newItem object;</pre>
+$("#example-selector").superselector("replaceItem","first", newItem); //Replace the first item in the list using the items value, with the newItem object;</pre>
                         <pre class="prettyprint lang-js">var firstItem = {value:"first", title:"First Item"};
 var newItem = {value:"new", title:"New Item"};
-$("#example-selector").tabulator("replaceItem",firstItem, newItem); //Replace the first item in the list using the items object, with the newItem object;</pre>
+$("#example-selector").superselector("replaceItem",firstItem, newItem); //Replace the first item in the list using the items object, with the newItem object;</pre>
 
                         <h2>Add Item</h2>
                         <p>To and an item to the end of the list, use the <span class='param'>addItem</span> function. The first argument is the new items object.</p>
                         <pre class="prettyprint lang-js">var newItem = {value:"new", title:"New Item"};
-$("#example-selector").tabulator("addItem", newItem); //Add the new item to the end off the list;</pre>
+$("#example-selector").superselector("addItem", newItem); //Add the new item to the end off the list;</pre>
 
                         <h2>Insert Item</h2>
                         <p>To replace an item, use the <span class='param'>insertItem</span> function. The first argumnet should be the item to be that you want to insert the item next to, this should either be the value of the item, or an object of the items definition. The second should be an object representing the new value. The third argument is a boolean value representing weather the new item is to be isnerted before (true) or after (false) the specified first item</p>
                         <pre class="prettyprint lang-js">var newItem = {value:"new", title:"New Item"};
-$("#example-selector").tabulator("replaceItem","first", newItem, true); //Insert the new item before the first item in the list;</pre>
+$("#example-selector").superselector("replaceItem","first", newItem, true); //Insert the new item before the first item in the list;</pre>
 
                         <h2>Get Item From value</h2>
                         <p>To get the object of an item based on its value, use the <span class='param'>getItem</span> function. pass the value of the item to the function and it will return the object representing the item.</p>
-                        <pre class="prettyprint lang-js">$("#example-selector").tabulator("getItems"); //Returns and array of objets for all items in the list;</pre>
+                        <pre class="prettyprint lang-js">$("#example-selector").superselector("getItems"); //Returns and array of objets for all items in the list;</pre>
                         <p>The function will return false if no item with a matching value is found.</p>
 
                         <h2>Get All Items</h2>
                         <p>To get the objects for all items in a SuperSelector, use the <span class='param'>getItems</span> function.</p>
-                        <pre class="prettyprint lang-js">$("#example-selector").tabulator("getItems"); //Returns and array of objets for all items in the list;</pre>
+                        <pre class="prettyprint lang-js">$("#example-selector").superselector("getItems"); //Returns and array of objets for all items in the list;</pre>
                         <p>Example Returned List:</p>
                         <pre class="prettyprint lang-js">[
     {value:"first", title:"First Item"},
@@ -256,7 +256,7 @@ $("#example-selector").tabulator("replaceItem","first", newItem, true); //Insert
     {value:"newThird", title:"3rd Item"},
 ];
 
-$("#example-selector").tabulator("setItems", newItems); //clear the old list and add a new list;</pre>
+$("#example-selector").superselector("setItems", newItems); //clear the old list and add a new list;</pre>
                     </article>
                     <a class="anchor" id="css"></a>
                     <article>
